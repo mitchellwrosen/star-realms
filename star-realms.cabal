@@ -1,0 +1,24 @@
+cabal-version: 2.4
+name: star-realms
+version: 0
+
+executable star-realms
+  build-depends:
+    planet-mitchell
+  default-extensions:
+    DuplicateRecordFields
+    NoImplicitPrelude
+    OverloadedStrings
+    StrictData
+  ghc-options:
+    -Wall
+  other-modules:
+    StarRealms.Card
+    StarRealms.Card.Ability
+    StarRealms.Card.Faction
+    StarRealms.Card.Base
+    StarRealms.Card.Ship
+    StarRealms.Deck
+    StarRealms.Location
+  main-is:
+    Main.hs
