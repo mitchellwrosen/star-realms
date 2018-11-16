@@ -12,6 +12,98 @@ data Card
   = CardBase Base
   | CardShip Ship
 
+initialPlayerDeck :: [Card]
+initialPlayerDeck =
+  replicate 2 viper ++ replicate 8 scout
+
+initialExplorerDeck :: [Card]
+initialExplorerDeck =
+  replicate 10 explorer
+
+initialTradeDeck :: [Card]
+initialTradeDeck =
+  [ barterWorld
+  , barterWorld
+  , battleBlob
+  , battleMech
+  , battlePod
+  , battlePod
+  , battleStation
+  , battleStation
+  , battlecruiser
+  , blobCarrier
+  , blobDestroyer
+  , blobDestroyer
+  , blobFighter
+  , blobFighter
+  , blobFighter
+  , blobWheel
+  , blobWheel
+  , blobWheel
+  , blobWorld
+  , brainWorld
+  , centralOffice
+  , commandShip
+  , corvette
+  , corvette
+  , cutter
+  , cutter
+  , cutter
+  , defenseCenter
+  , dreadnaught
+  , embassyYacht
+  , embassyYacht
+  , federationShuttle
+  , federationShuttle
+  , federationShuttle
+  , flagship
+  , fleetHQ
+  , freighter
+  , freighter
+  , imperialFighter
+  , imperialFighter
+  , imperialFighter
+  , imperialFrigate
+  , imperialFrigate
+  , imperialFrigate
+  , junkyard
+  , machineBase
+  , mechWorld
+  , missileBot
+  , missileBot
+  , missileBot
+  , missileMech
+  , mothership
+  , patrolMech
+  , patrolMech
+  , portOfCall
+  , ram
+  , ram
+  , recyclingStation
+  , recyclingStation
+  , royalRedoubt
+  , spaceStation
+  , spaceStation
+  , stealthNeedle
+  , supplyBot
+  , supplyBot
+  , supplyBot
+  , surveyShip
+  , surveyShip
+  , surveyShip
+  , theHive
+  , tradeBot
+  , tradeBot
+  , tradeBot
+  , tradeEscort
+  , tradePod
+  , tradePod
+  , tradePod
+  , tradingPost
+  , tradingPost
+  , warWorld
+  ]
+
 battleMech :: Card
 battleMech = undefined
 
@@ -77,9 +169,6 @@ tradeBot = undefined
 
 tradeEscort :: Card
 tradeEscort = undefined
-
-tradePod :: Card
-tradePod = undefined
 
 tradingPost :: Card
 tradingPost = undefined
@@ -368,6 +457,18 @@ theHive =
     , ally    = Just (AbilityDraw 1)
     , scrap   = Nothing
     }
+
+tradePod :: Card
+tradePod =
+  CardShip Ship
+    { name    = "Trade Pod"
+    , faction = Just Blob
+    , cost    = Just 2
+    , primary = AbilityTrade 3
+    , ally    = Just (AbilityCombat 2)
+    , scrap   = Nothing
+    }
+
 
 viper :: Card
 viper =

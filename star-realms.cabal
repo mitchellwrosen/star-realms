@@ -6,10 +6,14 @@ executable star-realms
   build-depends:
     planet-mitchell
   default-extensions:
+    DeriveGeneric
+    DerivingStrategies
     DuplicateRecordFields
+    LambdaCase
     NoImplicitPrelude
     OverloadedStrings
     StrictData
+    TypeApplications
   ghc-options:
     -Wall
   other-modules:
@@ -19,6 +23,9 @@ executable star-realms
     StarRealms.Card.Base
     StarRealms.Card.Ship
     StarRealms.Deck
+    StarRealms.Game
+    StarRealms.Game.InPlayCard
     StarRealms.Location
+    StarRealms.Player
   main-is:
     Main.hs

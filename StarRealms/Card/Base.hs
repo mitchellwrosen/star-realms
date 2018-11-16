@@ -16,4 +16,4 @@ data Base
   , primary :: Maybe Ability
   , ally    :: Maybe Ability
   , scrap   :: Maybe Ability
-  }
+  } deriving stock (Generic)

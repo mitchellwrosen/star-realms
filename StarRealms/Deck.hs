@@ -2,90 +2,14 @@ module StarRealms.Deck where
 
 import StarRealms.Card
 
-newtype Deck
-  = Deck [Card]
+import Mitchell.Prelude
 
-initialDeck :: Deck
-initialDeck =
-  Deck
-    [ barterWorld
-    , barterWorld
-    , battleBlob
-    , battleMech
-    , battlePod
-    , battlePod
-    , battleStation
-    , battleStation
-    , battlecruiser
-    , blobCarrier
-    , blobDestroyer
-    , blobDestroyer
-    , blobFighter
-    , blobFighter
-    , blobFighter
-    , blobWheel
-    , blobWheel
-    , blobWheel
-    , blobWorld
-    , brainWorld
-    , centralOffice
-    , commandShip
-    , corvette
-    , corvette
-    , cutter
-    , cutter
-    , cutter
-    , defenseCenter
-    , dreadnaught
-    , embassyYacht
-    , embassyYacht
-    , federationShuttle
-    , federationShuttle
-    , federationShuttle
-    , flagship
-    , fleetHQ
-    , freighter
-    , freighter
-    , imperialFighter
-    , imperialFighter
-    , imperialFighter
-    , imperialFrigate
-    , imperialFrigate
-    , imperialFrigate
-    , junkyard
-    , machineBase
-    , mechWorld
-    , missileBot
-    , missileBot
-    , missileBot
-    , missileMech
-    , mothership
-    , patrolMech
-    , patrolMech
-    , portOfCall
-    , ram
-    , ram
-    , recyclingStation
-    , recyclingStation
-    , royalRedoubt
-    , spaceStation
-    , spaceStation
-    , stealthNeedle
-    , supplyBot
-    , supplyBot
-    , supplyBot
-    , surveyShip
-    , surveyShip
-    , surveyShip
-    , theHive
-    , tradeBot
-    , tradeBot
-    , tradeBot
-    , tradeEscort
-    , tradePod
-    , tradePod
-    , tradePod
-    , tradingPost
-    , tradingPost
-    , warWorld
-    ]
+-- Remove a card from a deck by name. If it doesn't exist in the deck, return
+-- Nothing.
+removeCard :: Text -> [Card] -> Maybe [Card]
+removeCard name = \case
+  [] ->
+    Nothing
+
+  card:cards ->
+    undefined
