@@ -29,5 +29,10 @@ data Ability
   | AbilityTrade Natural
   -- | Put the next ship you acquire this turn on top of your deck.
 
+data AbilityType
+  = AbilityTypePrimary
+  | AbilityTypeAlly
+  | AbilityTypeScrap
+
 data Condition
   = ConditionTwoOrMoreBasesInPlay
