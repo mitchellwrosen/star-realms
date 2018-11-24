@@ -19,6 +19,7 @@ data Ability
   | AbilityDrawCardPerBlobPlayed
   -- | You may...
   | AbilityMay Ability
+  -- | You may put the next ship you acquire this turn on top of your deck.
   | AbilityNextShipOnTop
   -- | Target opponent discards a card.
   | AbilityOpponentDiscards

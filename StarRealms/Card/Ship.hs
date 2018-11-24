@@ -14,4 +14,4 @@ data Ship
   , primary :: Ability
   , ally    :: Maybe Ability
   , scrap   :: Maybe Ability
-  }
+  } deriving stock (Generic)

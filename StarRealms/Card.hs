@@ -12,13 +12,16 @@ data Card
   = CardBase Base
   | CardShip Ship
 
+-- | Get the name of a card.
+cardName :: Card -> Text
+cardName = \case
+  CardBase card -> view (the @"name") card
+  CardShip card -> view (the @"name") card
+
+-- | The initial player deck: 8 Scouts and 2 Vipers.
 initialPlayerDeck :: [Card]
 initialPlayerDeck =
   replicate 2 viper ++ replicate 8 scout
-
-initialExplorerDeck :: [Card]
-initialExplorerDeck =
-  replicate 10 explorer
 
 initialTradeDeck :: [Card]
 initialTradeDeck =
@@ -273,7 +276,7 @@ centralOffice =
     , primary = Just
                   (AbilityAnd
                     (AbilityTrade 2)
-                    (AbilityMay AbilityNextShipOnTop))
+                    AbilityNextShipOnTop)
     , ally    = Just (AbilityDraw 1)
     , scrap   = Nothing
     }
@@ -329,7 +332,7 @@ freighter =
     , faction = Just TradeFederation
     , cost    = Just 4
     , primary = AbilityTrade 4
-    , ally    = Just (AbilityMay AbilityNextShipOnTop)
+    , ally    = Just AbilityNextShipOnTop
     , scrap   = Nothing
     }
 
