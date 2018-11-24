@@ -4,7 +4,8 @@ version: 0
 
 executable star-realms
   build-depends:
-    planet-mitchell
+      base
+    , planet-mitchell
   default-extensions:
     DeriveGeneric
     DerivingStrategies
