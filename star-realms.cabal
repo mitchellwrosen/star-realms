@@ -26,6 +26,7 @@ executable star-realms
     StarRealms.Deck
     StarRealms.Game
     StarRealms.Game.InPlayCard
+    StarRealms.Game.Action
     StarRealms.Location
     StarRealms.Player
   main-is:
