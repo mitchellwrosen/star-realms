@@ -13,10 +13,10 @@ data Card
   | CardShip Ship
 
 -- | Get the name of a card.
-cardName :: Card -> Text
-cardName = \case
-  CardBase card -> view (the @"name") card
-  CardShip card -> view (the @"name") card
+cardName :: Lens' Card Text
+cardName f = \case
+  CardBase card -> CardBase <$> (the @"name") f card
+  CardShip card -> CardShip <$> (the @"name") f card
 
 -- | The initial player deck: 8 Scouts and 2 Vipers.
 initialPlayerDeck :: [Card]

@@ -17,7 +17,7 @@ removeCard name = \case
     Nothing
 
   card:cards
-    | cardName card == name ->
+    | view cardName card == name ->
         Just cards
 
     | otherwise ->

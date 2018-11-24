@@ -14,6 +14,7 @@ executable star-realms
     LambdaCase
     NoImplicitPrelude
     OverloadedStrings
+    RankNTypes
     StrictData
     TypeApplications
   ghc-options:

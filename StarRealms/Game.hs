@@ -16,6 +16,11 @@ data Game
   , tradeRow     :: [Card]
   } deriving stock (Generic)
 
+gamePlayer :: WhichPlayer -> Lens' Game Player
+gamePlayer = \case
+  Player1 -> the @"player1"
+  Player2 -> the @"player2"
+
 -- | Move a card from the trade deck to the trade row.
 drawCard :: Game -> Game
 drawCard game =

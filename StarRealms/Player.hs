@@ -15,4 +15,4 @@ data Player
   , deck      :: [Card]
   , discard   :: [Card]
   , inPlay    :: [InPlayCard]
-  }
+  } deriving stock (Generic)
