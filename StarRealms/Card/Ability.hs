@@ -24,7 +24,7 @@ data Ability
   | AbilityOpponentDiscards
   | AbilityOr Ability Ability
   -- | Scrap a card in the ______.
-  | AbilityScrap Location
+  | AbilityScrap [Location]
   | AbilityStealthNeedle
   | AbilityTrade Natural
   -- | Put the next ship you acquire this turn on top of your deck.

@@ -205,7 +205,7 @@ battlePod =
     , cost    = Just 2
     , primary = AbilityAnd
                   (AbilityCombat 4)
-                  (AbilityMay (AbilityScrap LocationTradeRow))
+                  (AbilityMay (AbilityScrap [LocationTradeRow]))
     , ally    = Just (AbilityCombat 2)
     , scrap   = Nothing
     }
@@ -245,7 +245,7 @@ blobDestroyer =
                   (AbilityMay
                     (AbilityAndOr
                       AbilityDestroyBase
-                      (AbilityScrap LocationTradeRow)))
+                      (AbilityScrap [LocationTradeRow])))
     , scrap   = Nothing
     }
 
@@ -429,7 +429,7 @@ supplyBot =
                   (AbilityTrade 2)
                   (AbilityMay
                     (AbilityScrap
-                      (LocationOr LocationHand LocationDiscardPile)))
+                      ([LocationHand, LocationDiscardPile])))
     , ally    = Just (AbilityCombat 2)
     , scrap   = Nothing
     }
