@@ -12,26 +12,26 @@ data InPlayCard
 
 data InPlayBase
   = InPlayBase
-  { name       :: Text
-  , faction    :: Faction
-  , cost       :: Natural
-  , defense    :: Natural
-  , outpost    :: Bool
-  , unplayed   :: [Ability]
-  , unplayable :: Maybe Ability
-  , scrap      :: Maybe Ability
+  { name    :: Text
+  , faction :: Faction
+  , cost    :: Natural
+  , defense :: Natural
+  , outpost :: Bool
+  , primary :: Maybe InPlayAbility
+  , ally    :: Maybe InPlayAbility
+  , scrap   :: Maybe InPlayAbility
   }
 
 data InPlayShip
   = InPlayShip
-  { name       :: Text
-  , faction    :: Maybe Faction
-  , cost       :: Maybe Natural
-  , ability    :: InPlayShipAbility
-  , scrap      :: Maybe Ability
+  { name    :: Text
+  , faction :: Maybe Faction
+  , cost    :: Maybe Natural
+  , primary :: Ability
+  , ally    :: Maybe InPlayAbility
+  , scrap   :: Maybe InPlayAbility
   }
 
-data InPlayShipAbility
-  = NoAbility
-  | UnplayedAbility Ability
-  | UnplayableAbility Ability
+data InPlayAbility
+  = Played Ability
+  | Unplayed Ability
