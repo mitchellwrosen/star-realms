@@ -2,6 +2,7 @@ module StarRealms.Player where
 
 import StarRealms.Card
 import StarRealms.Game.InPlayCard
+import StarRealms.Deck
 
 import Mitchell.Prelude
 import Num.Natural
@@ -21,3 +22,8 @@ data WhichPlayer
   = Player1
   | Player2
   deriving stock (Eq)
+
+pluckCardFromHand :: Text -> Player -> Maybe (Card, Player)
+pluckCardFromHand card player = do
+  (c, cs) <- pluckCard card (view (the @"hand") player)
+  Just (c, (the @"hand" .~ cs) player)

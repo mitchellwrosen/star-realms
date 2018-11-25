@@ -54,10 +54,11 @@ updateGame player action state game =
               then
                 case cardPrimaryAbility (getCardByName card) of
                   Nothing -> if choice == ChoiceNone
-                    then ActionSuccessful undefined undefined
+                    then ActionSuccessful state undefined
                     else ActionInvalid
                   Just ability -> undefined
               else ActionInvalid
+
           ActionUseAbilityOnCard card typ choice -> undefined
           ActionCombat target -> undefined
           ActionPurchaseTradeRow card location -> undefined
