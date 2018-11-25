@@ -1,7 +1,9 @@
 module StarRealms.Game.InPlayCard where
 
 import StarRealms.Card.Ability
+import StarRealms.Card.Base
 import StarRealms.Card.Faction
+import StarRealms.Card.Ship
 
 import Mitchell.Prelude
 import Num.Natural
@@ -12,10 +14,12 @@ data InPlayCard
 
 data InPlayBase
   = InPlayBase
-  { name    :: Text
-  , faction :: Faction
+  { original :: Base
+  , name    :: Text
+  , faction :: [Faction]
   , cost    :: Natural
   , defense :: Natural
+  , damage  :: Natural
   , outpost :: Bool
   , primary :: Maybe InPlayAbility
   , ally    :: Maybe InPlayAbility
@@ -24,12 +28,13 @@ data InPlayBase
 
 data InPlayShip
   = InPlayShip
-  { name    :: Text
-  , faction :: Maybe Faction
-  , cost    :: Maybe Natural
-  , primary :: Ability
-  , ally    :: Maybe InPlayAbility
-  , scrap   :: Maybe InPlayAbility
+  { original :: Ship
+  , name     :: Text
+  , faction  :: [Faction]
+  , cost     :: Maybe Natural
+  , primary  :: Ability
+  , ally     :: Maybe InPlayAbility
+  , scrap    :: Maybe InPlayAbility
   }
 
 data InPlayAbility
