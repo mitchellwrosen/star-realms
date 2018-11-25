@@ -4,21 +4,22 @@ import StarRealms.Card
 
 import Mitchell.Prelude
 
+-- Draw a card from the top of a deck. If the deck is empty, return Nothing.
 drawCard :: [Card] -> Maybe (Card, [Card])
 drawCard = \case
   [] -> Nothing
   x:xs -> Just (x, xs)
 
--- Remove a card from a deck by name. If it doesn't exist in the deck, return
--- Nothing.
-removeCard :: Text -> [Card] -> Maybe [Card]
-removeCard name = \case
+-- Remove a card from a deck by name, and return it. If it doesn't exist in the
+-- deck, return Nothing.
+pluckCard :: Text -> [Card] -> Maybe (Card, [Card])
+pluckCard name = \case
   [] ->
     Nothing
 
   card:cards
     | view cardName card == name ->
-        Just cards
+        Just (card, cards)
 
     | otherwise ->
-        (card:) <$> removeCard name cards
+        over (_Just . _2) (card:) (pluckCard name cards)
