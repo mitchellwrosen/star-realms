@@ -18,6 +18,11 @@ cardName f = \case
   CardBase card -> CardBase <$> (the @"name") f card
   CardShip card -> CardShip <$> (the @"name") f card
 
+cardPrimaryAbility :: Card -> Maybe Ability
+cardPrimaryAbility = \case
+  CardBase card -> view (the @"primary") card
+  CardShip card -> Just (view (the @"primary") card)
+
 -- | The initial player deck: 8 Scouts and 2 Vipers.
 initialPlayerDeck :: [Card]
 initialPlayerDeck =
