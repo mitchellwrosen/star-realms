@@ -2,6 +2,7 @@ module StarRealms.Game.Action where
 
 import StarRealms.Location
 import StarRealms.Card.Ability
+import StarRealms.Card.Choice
 
 import Mitchell.Prelude
 
@@ -14,19 +15,6 @@ data Action
   | ActionDiscard Text
   | ActionScrap Text
   | ActionEndTurn
-
-data Choice
-  = ChoiceNone
-  | ChoiceTrade
-  | ChoiceAuthority
-  | ChoiceCombat
-  | ChoiceDraw
-  | ChoiceInPlayShip Text
-  | ChoiceTradeRowShip Text
-  | ChoiceDestroyBase Text
-  | ChoiceScrap [(Text, Location)]
-  | ChoiceDiscard [(Text, Location)]
-  | ChoiceAnd Choice Choice
 
 data Target
   = TargetFace

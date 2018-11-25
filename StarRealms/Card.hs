@@ -7,6 +7,7 @@ import StarRealms.Card.Ship
 import StarRealms.Location
 
 import Mitchell.Prelude
+import qualified Map
 
 data Card
   = CardBase Base
@@ -111,6 +112,15 @@ initialTradeDeck =
   , tradingPost
   , warWorld
   ]
+
+cardMap :: Map Text Card
+cardMap = undefined
+
+getCardByName :: Text -> Card
+getCardByName card =
+  case Map.lookup card cardMap of
+    Nothing -> error "getCardByName: card does not exist"
+    Just c -> c
 
 battleMech :: Card
 battleMech = undefined

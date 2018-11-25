@@ -22,6 +22,7 @@ executable star-realms
   other-modules:
     StarRealms.Card
     StarRealms.Card.Ability
+    StarRealms.Card.Choice
     StarRealms.Card.Faction
     StarRealms.Card.Base
     StarRealms.Card.Ship

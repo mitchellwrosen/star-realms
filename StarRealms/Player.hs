@@ -16,3 +16,8 @@ data Player
   , discard   :: [Card]
   , inPlay    :: [InPlayCard]
   } deriving stock (Generic)
+
+data WhichPlayer
+  = Player1
+  | Player2
+  deriving stock (Eq)

@@ -1,8 +1,10 @@
 module StarRealms.Card.Ability where
 
 import StarRealms.Location
+import StarRealms.Card.Choice
 
 import Num.Natural
+import Mitchell.Prelude
 
 data Ability
   -- | Acquire any ship without paying its cost and put it on top of your deck.
@@ -37,3 +39,22 @@ data AbilityType
 
 data Condition
   = ConditionTwoOrMoreBasesInPlay
+
+data Resolution
+  = ResolutionAcquire Text
+  | ResolutionAnd Resolution Resolution
+  | ResolutionAuthority Natural
+  | ResolutionCombat Natural
+  | ResolutionTrade Natural
+  | ResolutionConditional Condition Resolution
+  | ResolutionDestroyBase Text
+  | ResolutionDiscard [Text]
+  | ResolutionDraw GameNatural
+  | ResolutionNextShipOnTop
+  | ResolutionOpponentDiscards
+  | ResolutionCardsIn [(Text, Location)]
+  | ResolutionStealthNeedle Text Choice
+
+data GameNatural
+  = GameNaturalLit Natural
+  | GameNaturalBlobsPlayed
