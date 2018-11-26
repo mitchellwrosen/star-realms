@@ -90,9 +90,6 @@ updateGame (player, action) game =
           ActionEndTurn -> undefined
         else ActionInvalid
 
--- abilityHasChoice :: Ability -> Choice -> something?
-abilityHasChoice = undefined
-
 -- | Move a card from the trade deck to the trade row.
 drawCard :: Game -> Game
 drawCard game =
