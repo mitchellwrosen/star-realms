@@ -22,13 +22,14 @@ data InPlayCard
 
 data InPlayBase
   = InPlayBase
-  { original :: Base
+  { original       :: Base
+  , playedThisTurn :: Bool
   -- | How much damage the base has taken. Invariant: it's less than the base's
   -- defense.
-  , damage   :: Natural
-  , primary  :: InPlayAbility
-  , ally     :: InPlayAbility
-  , scrap    :: InPlayAbility
+  , damage         :: Natural
+  , primary        :: InPlayAbility
+  , ally           :: InPlayAbility
+  , scrap          :: InPlayAbility
   }
 
 data InPlayShip
@@ -57,11 +58,12 @@ cardToInPlayCard = \case
     baseToInPlayBase :: Base -> InPlayBase
     baseToInPlayBase base =
       InPlayBase
-        { original = base
-        , damage   = 0
-        , primary  = Unplayed
-        , ally     = Unplayed
-        , scrap    = Unplayed
+        { original       = base
+        , playedThisTurn = True
+        , damage         = 0
+        , primary        = Unplayed
+        , ally           = Unplayed
+        , scrap          = Unplayed
         }
 
     shipToInPlayShip :: Ship -> InPlayShip

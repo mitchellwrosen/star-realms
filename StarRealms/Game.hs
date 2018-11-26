@@ -54,7 +54,9 @@ updateGame (player, action) game =
         then case action of
           ActionPlayCard card choice ->
             case pluckCardFromHand card (game ^. currentPlayerL) of
-              Nothing -> ActionInvalid
+              Nothing ->
+                ActionInvalid
+
               Just (card', player') ->
                 case cardPrimaryAbility (getCardByName card) of
                   Nothing ->
@@ -72,6 +74,7 @@ updateGame (player, action) game =
                         in
                           newGame)
                       else ActionInvalid
+
                   Just ability -> undefined
 
           ActionUseAbilityOnCard card typ choice -> undefined
