@@ -2,6 +2,7 @@
 
 module StarRealms.Game.Resolution
   ( Resolution(..)
+  , resolve
   ) where
 
 import StarRealms.Card.Ability
