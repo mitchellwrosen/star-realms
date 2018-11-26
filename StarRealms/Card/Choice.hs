@@ -6,10 +6,9 @@ import Mitchell.Prelude
 
 data Choice
   = ChoiceNone
-  | ChoiceTrade
-  | ChoiceAuthority
-  | ChoiceCombat
-  | ChoiceDraw
+  | ChoiceYes Choice
+  | ChoiceLeft Choice
+  | ChoiceRight Choice
   | ChoiceCard Text
   | ChoiceCards [Text]
   | ChoiceCardsIn [(Text, Location)]
