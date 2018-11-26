@@ -50,14 +50,14 @@ updateGame player action state game =
                 . the @"hand"
                 . folded
                 . cardName ) game
-            in if card `elem` hand
-              then
+            in case pluckCardFromHand card playerP of
+              Nothing -> ActionInvalid
+              Just (card', player'') ->
                 case cardPrimaryAbility (getCardByName card) of
                   Nothing -> if choice == ChoiceNone
                     then ActionSuccessful state undefined
                     else ActionInvalid
                   Just ability -> undefined
-              else ActionInvalid
 
           ActionUseAbilityOnCard card typ choice -> undefined
           ActionCombat target -> undefined
@@ -67,6 +67,9 @@ updateGame player action state game =
           ActionScrap card -> ActionInvalid
           ActionEndTurn -> undefined
         else ActionInvalid
+  where
+    playerP :: Player
+    playerP = view (gamePlayer player) game
 
 -- abilityHasChoice :: Ability -> Choice -> something?
 abilityHasChoice = undefined
