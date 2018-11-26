@@ -1,12 +1,12 @@
 module StarRealms.Game where
 
 import StarRealms.Card
+import StarRealms.Card.Choice
+import StarRealms.Game.Action
+import StarRealms.Game.InPlayCard
 import StarRealms.Player
 
 import qualified StarRealms.Deck as Deck
-
-import StarRealms.Card.Choice
-import StarRealms.Game.Action
 
 import Mitchell.Prelude
 
@@ -46,8 +46,8 @@ data UpdateGameResult
   = ActionInvalid
   | ActionSuccessful Game
 
-updateGame :: WhichPlayer -> Action -> Game -> UpdateGameResult
-updateGame player action game =
+updateGame :: (WhichPlayer, Action) -> Game -> UpdateGameResult
+updateGame (player, action) game =
   case game ^. the @"state" of
     GameStateMain ->
       if player == game ^. the @WhichPlayer
@@ -55,11 +55,22 @@ updateGame player action game =
           ActionPlayCard card choice ->
             case pluckCardFromHand card (game ^. currentPlayerL) of
               Nothing -> ActionInvalid
-              Just (card', player'') ->
+              Just (card', player') ->
                 case cardPrimaryAbility (getCardByName card) of
                   Nothing ->
                     if choice == ChoiceNone
-                      then ActionSuccessful undefined
+                      then ActionSuccessful
+                        (let
+                          inPlayCard :: InPlayCard
+                          inPlayCard = cardToInPlayCard card'
+
+                          newPlayer :: Player
+                          newPlayer = (the @"inPlay" %~ (inPlayCard:)) player'
+
+                          newGame :: Game
+                          newGame = (currentPlayerL .~ newPlayer) game
+                        in
+                          newGame)
                       else ActionInvalid
                   Just ability -> undefined
 
