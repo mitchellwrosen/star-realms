@@ -48,6 +48,7 @@ resolve ability choice f g =
 
     AbilityAndOr ab1 ab2 ->
       case choice of
+        ChoiceNone -> Just ResolutionNone
         ChoiceLeft c1 -> resolve ab1 c1 f g
         ChoiceRight c2 -> resolve ab2 c2 f g
         ChoiceAnd c1 c2 ->
@@ -107,6 +108,7 @@ resolve ability choice f g =
 
     AbilityOr ab1 ab2 ->
       case choice of
+        ChoiceNone -> Just ResolutionNone
         ChoiceLeft c1 -> resolve ab1 c1 f g
         ChoiceRight c2 -> resolve ab2 c2 f g
         _ -> Nothing
