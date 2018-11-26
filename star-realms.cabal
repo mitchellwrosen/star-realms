@@ -9,6 +9,7 @@ executable star-realms
   default-extensions:
     DataKinds
     DeriveGeneric
+    DeriveFunctor
     DerivingStrategies
     DuplicateRecordFields
     LambdaCase
