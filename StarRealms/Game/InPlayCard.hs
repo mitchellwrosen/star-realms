@@ -30,14 +30,14 @@ data InPlayBase
   , primary        :: InPlayAbility
   , ally           :: InPlayAbility
   , scrap          :: InPlayAbility
-  }
+  } deriving stock (Generic)
 
 data InPlayShip
   = InPlayShip
   { original :: Ship
   , ally     :: InPlayAbility
   , scrap    :: InPlayAbility
-  }
+  } deriving stock (Generic)
 
 data InPlayAbility
   = Played

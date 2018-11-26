@@ -1,14 +1,18 @@
 module StarRealms.Game where
 
 import StarRealms.Card
+import StarRealms.Card.Ability    (GameNatural(..))
 import StarRealms.Card.Choice
+import StarRealms.Card.Faction
 import StarRealms.Game.Action
 import StarRealms.Game.InPlayCard
+import StarRealms.Game.Resolution
 import StarRealms.Player
 
 import qualified StarRealms.Deck as Deck
 
 import Mitchell.Prelude
+import Num.Natural
 
 data Game
   = Game
@@ -100,3 +104,28 @@ drawCard game =
       game
         & the @"tradeDeck" .~ cards
         & the @"tradeRow"  %~ (card:)
+
+-- | Resolve a GameNatural to a Natural, given the Game.
+resolveGameNatural :: Game -> GameNatural -> Natural
+resolveGameNatural game = \case
+  GameNaturalLit n ->
+    n
+
+  GameNaturalBlobsPlayed ->
+    let
+      isBlobPlayedThisTurn :: InPlayCard -> Bool
+      isBlobPlayedThisTurn = \case
+        InPlayCardBase base ->
+          and
+            [ base ^. the @"original" . the @"faction" == Blob
+            , base ^. the @"playedThisTurn"
+            ]
+
+        InPlayCardShip ship ->
+          ship ^. the @"original" . the @"faction" == Just Blob
+
+        InPlayCardStealthNeedle ship ->
+          ship ^. the @"original" . the @"faction" == Just Blob
+    in
+      (fromIntegral . length . filter isBlobPlayedThisTurn)
+        (game ^. currentPlayerL . the @"inPlay")

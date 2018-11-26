@@ -15,6 +15,8 @@ data Player
   , hand      :: [Card]
   , deck      :: [Card]
   , discard   :: [Card]
+  -- | In-play cards. Invariant: cards sorted by reverse-played-in order (the
+  -- latest card played is at the head of the list).
   , inPlay    :: [InPlayCard]
   } deriving stock (Generic)
 
