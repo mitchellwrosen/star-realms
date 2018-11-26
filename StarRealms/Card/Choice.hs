@@ -15,4 +15,3 @@ data Choice
   | ChoiceCardsIn [(Text, Location)]
   | ChoiceAnd Choice Choice
   deriving stock (Eq)
-

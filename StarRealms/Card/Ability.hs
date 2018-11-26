@@ -2,6 +2,7 @@ module StarRealms.Card.Ability where
 
 import StarRealms.Location
 import StarRealms.Card.Choice
+import StarRealms.Condition
 
 import Num.Natural
 import Mitchell.Prelude
@@ -36,25 +37,3 @@ data AbilityType
   = AbilityTypePrimary
   | AbilityTypeAlly
   | AbilityTypeScrap
-
-data Condition
-  = ConditionTwoOrMoreBasesInPlay
-
-data Resolution
-  = ResolutionAcquire Text
-  | ResolutionAnd Resolution Resolution
-  | ResolutionAuthority Natural
-  | ResolutionCombat Natural
-  | ResolutionTrade Natural
-  | ResolutionConditional Condition Resolution
-  | ResolutionDestroyBase Text
-  | ResolutionDiscard [Text]
-  | ResolutionDraw GameNatural
-  | ResolutionNextShipOnTop
-  | ResolutionOpponentDiscards
-  | ResolutionCardsIn [(Text, Location)]
-  | ResolutionStealthNeedle Text Choice
-
-data GameNatural
-  = GameNaturalLit Natural
-  | GameNaturalBlobsPlayed

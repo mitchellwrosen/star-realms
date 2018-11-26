@@ -3,13 +3,12 @@ module StarRealms.Game where
 import StarRealms.Card
 import StarRealms.Player
 
-import           StarRealms.Card.Choice
-import qualified StarRealms.Deck        as Deck
-import           StarRealms.Game.Action
+import qualified StarRealms.Deck as Deck
 
-import Alg.Functor
+import StarRealms.Card.Choice
+import StarRealms.Game.Action
+
 import Mitchell.Prelude
-import Optic.Fold
 
 data Game
   = Game
@@ -22,12 +21,12 @@ data Game
   , tradeRow  :: [Card]
   } deriving stock (Generic)
 
--- | Get the current player of a game.
-getCurrentPlayer :: Game -> Player
-getCurrentPlayer game =
+-- | A lens onto the current player of a game.
+currentPlayerL :: Lens' Game Player
+currentPlayerL f game =
   case game ^. the @WhichPlayer of
-    Player1 -> game ^. the @"player1"
-    Player2 -> game ^. the @"player2"
+    Player1 -> the @"player1" f game
+    Player2 -> the @"player2" f game
 
 -- | The state of the game, which determines which messages are valid.
 data GameState
@@ -53,8 +52,8 @@ updateGame player action game =
     GameStateMain ->
       if player == game ^. the @WhichPlayer
         then case action of
-          ActionPlayCardFromHand card choice ->
-            case pluckCardFromHand card (getCurrentPlayer game) of
+          ActionPlayCard card choice ->
+            case pluckCardFromHand card (game ^. currentPlayerL) of
               Nothing -> ActionInvalid
               Just (card', player'') ->
                 case cardPrimaryAbility (getCardByName card) of
@@ -65,8 +64,8 @@ updateGame player action game =
                   Just ability -> undefined
 
           ActionUseAbilityOnCard card typ choice -> undefined
-          ActionCombat target -> undefined
-          ActionPurchaseTradeRow card location -> undefined
+          ActionAssignCombat target -> undefined
+          ActionPurchase card location -> undefined
           ActionPurchaseExplorer location -> undefined
           ActionDiscard card -> ActionInvalid
           ActionScrap card -> ActionInvalid

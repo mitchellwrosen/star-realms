@@ -27,10 +27,12 @@ executable star-realms
     StarRealms.Card.Faction
     StarRealms.Card.Base
     StarRealms.Card.Ship
+    StarRealms.Condition
     StarRealms.Deck
     StarRealms.Game
-    StarRealms.Game.InPlayCard
     StarRealms.Game.Action
+    StarRealms.Game.InPlayCard
+    StarRealms.Game.Resolution
     StarRealms.Location
     StarRealms.Player
   main-is:
