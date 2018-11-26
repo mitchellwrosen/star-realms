@@ -2,7 +2,6 @@
 
 module StarRealms.Game.Resolution
   ( Resolution(..)
-  , GameNatural
   ) where
 
 import StarRealms.Card.Choice
@@ -21,12 +20,8 @@ data Resolution
   | ResolutionConditional Condition Resolution
   | ResolutionDestroyBase Text
   | ResolutionDiscard [Text]
-  | ResolutionDraw GameNatural
+  | ResolutionDraw Natural
   | ResolutionNextShipOnTop
   | ResolutionOpponentDiscards
   | ResolutionStealthNeedle Text Choice
   | ResolutionTrade Natural
-
-data GameNatural
-  = GameNaturalLit Natural
-  | GameNaturalBlobsPlayed

@@ -211,7 +211,7 @@ battleBlob =
     , faction = Just Blob
     , cost    = Just 6
     , primary = AbilityCombat 8
-    , ally    = Just (AbilityDraw 1)
+    , ally    = Just (AbilityDraw (GameNaturalLit 1))
     , scrap   = Just (AbilityCombat 4)
     }
 
@@ -292,7 +292,7 @@ centralOffice =
                   (AbilityAnd
                     (AbilityTrade 2)
                     AbilityNextShipOnTop)
-    , ally    = Just (AbilityDraw 1)
+    , ally    = Just (AbilityDraw (GameNaturalLit 1))
     , scrap   = Nothing
     }
 
@@ -302,7 +302,7 @@ corvette =
     { name    = "Corvette"
     , faction = Just StarEmpire
     , cost    = Just 2
-    , primary = AbilityAnd (AbilityCombat 1) (AbilityDraw 1)
+    , primary = AbilityAnd (AbilityCombat 1) (AbilityDraw (GameNaturalLit 1))
     , ally    = Just (AbilityCombat 2)
     , scrap   = Nothing
     }
@@ -359,7 +359,7 @@ imperialFrigate =
     , cost    = Just 3
     , primary = AbilityAnd (AbilityCombat 4) AbilityOpponentDiscards
     , ally    = Just (AbilityCombat 2)
-    , scrap   = Just (AbilityDraw 1)
+    , scrap   = Just (AbilityDraw (GameNaturalLit 1))
     }
 
 mothership :: Card
@@ -368,8 +368,8 @@ mothership =
     { name    = "Mothership"
     , faction = Just Blob
     , cost    = Just 7
-    , primary = AbilityAnd (AbilityCombat 6) (AbilityDraw 1)
-    , ally    = Just (AbilityDraw 1)
+    , primary = AbilityAnd (AbilityCombat 6) (AbilityDraw (GameNaturalLit 1))
+    , ally    = Just (AbilityDraw (GameNaturalLit 1))
     , scrap   = Nothing
     }
 
@@ -385,7 +385,7 @@ portOfCall =
     , ally    = Nothing
     , scrap   = Just
                   (AbilityAnd
-                    (AbilityDraw 1)
+                    (AbilityDraw (GameNaturalLit 1))
                     (AbilityMay AbilityDestroyBase))
     }
 
@@ -458,7 +458,7 @@ surveyShip =
     { name    = "Survey Ship"
     , faction = Just StarEmpire
     , cost    = Just 3
-    , primary = AbilityAnd (AbilityTrade 1) (AbilityDraw 1)
+    , primary = AbilityAnd (AbilityTrade 1) (AbilityDraw (GameNaturalLit 1))
     , ally    = Nothing
     , scrap   = Just AbilityOpponentDiscards
     }
@@ -472,7 +472,7 @@ theHive =
     , defense = 5
     , outpost = False
     , primary = Just (AbilityCombat 3)
-    , ally    = Just (AbilityDraw 1)
+    , ally    = Just (AbilityDraw (GameNaturalLit 1))
     , scrap   = Nothing
     }
 

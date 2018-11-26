@@ -18,8 +18,7 @@ data Ability
   | AbilityDestroyBase
   -- | Discard up to @n@ cards, then draw that many cards.
   | AbilityDiscardThenDraw Natural
-  | AbilityDraw Natural
-  | AbilityDrawCardPerBlobPlayed
+  | AbilityDraw GameNatural
   -- | You may...
   | AbilityMay Ability
   -- | You may put the next ship you acquire this turn on top of your deck.
@@ -37,3 +36,7 @@ data AbilityType
   = AbilityTypePrimary
   | AbilityTypeAlly
   | AbilityTypeScrap
+
+data GameNatural
+  = GameNaturalLit Natural
+  | GameNaturalBlobsPlayed
