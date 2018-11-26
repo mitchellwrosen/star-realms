@@ -1,77 +1,73 @@
 module StarRealms.Game.InPlayCard where
 
 import StarRealms.Card
-import StarRealms.Card.Ability
 import StarRealms.Card.Base
-import StarRealms.Card.Faction
 import StarRealms.Card.Ship
 
 import Mitchell.Prelude
 import Num.Natural
 
+-- | An in-play card has the original card, plus some additional data that is
+-- only relevant while the card is on the battlefield:
+--
+-- * Has the primary/ally/scrap ability been played?
+-- * Has it taken damage?
 data InPlayCard
   = InPlayCardBase InPlayBase
+  -- | An in-play ship. Invariant: it's not Stealth Needle.
   | InPlayCardShip InPlayShip
+  -- | An in-play Stealth Needle. Contains the card it has cloned, rather than
+  -- Stealth Needle itself.
+  | InPlayCardStealthNeedle InPlayShip
 
 data InPlayBase
   = InPlayBase
   { original :: Base
-  , name     :: Text
-  , faction  :: [Faction]
-  , cost     :: Natural
-  , defense  :: Natural
+  -- | How much damage the base has taken. Invariant: it's less than the base's
+  -- defense.
   , damage   :: Natural
-  , outpost  :: Bool
-  , primary  :: Maybe InPlayAbility
-  , ally     :: Maybe InPlayAbility
-  , scrap    :: Maybe InPlayAbility
+  , primary  :: InPlayAbility
+  , ally     :: InPlayAbility
+  , scrap    :: InPlayAbility
   }
 
 data InPlayShip
   = InPlayShip
   { original :: Ship
-  , name     :: Text
-  , faction  :: [Faction]
-  , cost     :: Maybe Natural
-  , primary  :: Ability
-  , ally     :: Maybe InPlayAbility
-  , scrap    :: Maybe InPlayAbility
+  , ally     :: InPlayAbility
+  , scrap    :: InPlayAbility
   }
 
 data InPlayAbility
-  = Played Ability
-  | Unplayed Ability
+  = Played
+  | Unplayed
 
--- Derive a default InPlayCard from a Card.
+-- Make an 'InPlayCard' from a 'Card'. Invariant: the card isn't Stealth Needle.
 cardToInPlayCard :: Card -> InPlayCard
 cardToInPlayCard = \case
-  CardBase card -> InPlayCardBase (baseToInPlayBase card)
-  CardShip card -> InPlayCardShip (shipToInPlayShip card)
+  CardBase card ->
+    InPlayCardBase (baseToInPlayBase card)
+
+  CardShip card ->
+    if card ^. the @"name" == "Stealth Needle"
+      then error "cardToInPlayCard: Stealth Needle"
+      else InPlayCardShip (shipToInPlayShip card)
 
   where
     baseToInPlayBase :: Base -> InPlayBase
     baseToInPlayBase base =
       InPlayBase
         { original = base
-        , name     = view (the @"name") base
-        , faction  = [view (the @"faction") base]
-        , cost     = view (the @"cost") base
-        , defense  = view (the @"defense") base
         , damage   = 0
-        , outpost  = view (the @"outpost") base
-        , primary  = Unplayed <$> view (the @"primary") base
-        , ally     = Unplayed <$> view (the @"ally") base
-        , scrap    = Unplayed <$> view (the @"scrap") base
+        , primary  = Unplayed
+        , ally     = Unplayed
+        , scrap    = Unplayed
         }
 
     shipToInPlayShip :: Ship -> InPlayShip
     shipToInPlayShip ship =
       InPlayShip
         { original = ship
-        , name     = view (the @"name") ship
-        , faction  = maybe [] pure (view (the @"faction") ship)
-        , cost     = view (the @"cost") ship
-        , primary  = view (the @"primary") ship
-        , ally     = Unplayed <$> view (the @"ally") ship
-        , scrap    = Unplayed <$> view (the @"scrap") ship
+        , ally     = Unplayed
+        , scrap    = Unplayed
         }
