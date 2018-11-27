@@ -13,19 +13,32 @@ import StarRealms.Location
 import Mitchell.Prelude
 import Num.Natural
 
+-- | The resolution of a card ability.
 data Resolution
   = ResolutionNone
+  -- | Acquire any ship without paying its cost and put it on top of your deck.
   | ResolutionAcquire Text
   | ResolutionAnd Resolution Resolution
+  -- | Gain authority.
   | ResolutionAuthority Natural
+  -- | Scrap cards.
   | ResolutionScrap [(Text, Location)]
+  -- | Add combat to the combat pool.
   | ResolutionCombat Natural
+  -- | Destroy target base.
   | ResolutionDestroyBase Text
+  -- | Discard cards.
   | ResolutionDiscard [Text]
+  -- | Draw cards.
   | ResolutionDraw Natural
+  -- | You may put the next ship you acquire this turn on top of your deck.
   | ResolutionNextShipOnTop
+  -- | Target opponent discards a card.
   | ResolutionOpponentDiscards
+  -- | Stealth Needle intends to copy the given in-play ship, with a choice for
+  -- that ship's primary ability.
   | ResolutionStealthNeedle Text Choice
+  -- | Add trade to the trade pool.
   | ResolutionTrade Natural
 
 resolve
